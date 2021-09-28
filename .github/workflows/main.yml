@@ -36,6 +36,4 @@ jobs:
         with:
           body: ${{ steps.generate_changelog.outputs.changelog }}
           files: |
-            FlatEarth-Windows.zip
-            FlatEarth-Linux.zip
-            FlatEarth-macOS.zip
+            dist/*.zip
