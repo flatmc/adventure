@@ -14,6 +14,8 @@ jobs:
           node-version: '16'
           cache: 'npm'
           cache-dependency-path: package-lock.json
+      - name: Install dependencies
+        run: npm install
       - name: Build
         run: npm run build
       - name: Package everything up
