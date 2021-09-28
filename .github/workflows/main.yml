@@ -21,7 +21,9 @@ jobs:
       - name: Package everything up
         working-directory: ${{ github.workspace }}/dist
         run: |
-          rename 's/main/FlatEarth/' *
+          mv main-win.exe FlatEarth.exe
+          mv main-linux FlatEarth-linux
+          mv main-macos FlatEarth-macos
           zip -r FlatEarth-Windows.zip flatearth_adventure FlatEarth-win.exe
           zip -r FlatEarth-Linux.zip flatearth_adventure FlatEarth-linux
           zip -r FlatEarth-macOS.zip flatearth_adventure FlatEarth-macos
