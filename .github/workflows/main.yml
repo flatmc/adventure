@@ -24,7 +24,7 @@ jobs:
           mv main-win.exe FlatEarth.exe
           mv main-linux FlatEarth-linux
           mv main-macos FlatEarth-macos
-          zip -r FlatEarth-Windows.zip flatearth_adventure FlatEarth-win.exe
+          zip -r FlatEarth-Windows.zip flatearth_adventure FlatEarth.exe
           zip -r FlatEarth-Linux.zip flatearth_adventure FlatEarth-linux
           zip -r FlatEarth-macOS.zip flatearth_adventure FlatEarth-macos
       - uses: heinrichreimer/github-changelog-generator-action@v2.1.1
