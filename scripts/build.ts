@@ -1,4 +1,6 @@
 import shell from "shelljs"
+import path from "path"
+import fs from "fs"
 
 {
   const argv0 = process.argv[0].split("/")
@@ -8,5 +10,18 @@ import shell from "shelljs"
   }
 }
 
+const OUT_DIR = "dist"
+const WORKDIR = path.join(OUT_DIR, "flatearth_adventure")
+
 shell.exec("tsc")
-shell.exec("pkg build/main.js --out-path dist --config package.json")
+shell.exec(
+  `pkg ${path.join(
+    "build",
+    "main.js"
+  )} --out-path ${OUT_DIR} --config package.json`
+)
+
+if (!fs.existsSync(WORKDIR)) shell.mkdir(WORKDIR)
+
+// copy launcher resources
+shell.cp("-R", path.join("resources", "launcher", "*"), path.join(WORKDIR))

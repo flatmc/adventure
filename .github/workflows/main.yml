@@ -1,0 +1,37 @@
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build-release:
+    name: 'Build and release'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
+      - name: Build
+        run: npm run build
+      - name: Package everything up
+        working-directory: ${{ github.workspace }}/dist
+        run: |
+          rename 's/main/FlatEarth/' *
+          zip -r FlatEarth-Windows.zip flatearth_adventure FlatEarth-win.exe
+          zip -r FlatEarth-Linux.zip flatearth_adventure FlatEarth-linux
+          zip -r FlatEarth-macOS.zip flatearth_adventure FlatEarth-macos
+      - uses: heinrichreimer/github-changelog-generator-action@v2.1.1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+        id: generate_changelog
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          body: ${{ steps.generate_changelog.outputs.changelog }}
+          files: |
+            FlatEarth-Windows.zip
+            FlatEarth-Linux.zip
+            FlatEarth-macOS.zip

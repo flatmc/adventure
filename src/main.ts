@@ -836,9 +836,11 @@ export function createDefaultLogger(forceColor?: boolean): LogHandlerFunc {
 Logger.registerHandler(createDefaultLogger())
 
 const WORKDIR = path.join(process.cwd(), "flatearth_adventure")
-const FIRST_RUN = !fs.existsSync(WORKDIR)
 
-if (!fs.existsSync(WORKDIR)) fs.mkdirSync(WORKDIR)
+if (!fs.existsSync(WORKDIR)) {
+  console.log(`ERROR: ${WORKDIR} does not exist.`)
+  process.exit(1)
+}
 const configFilePath = path.join(WORKDIR, "settings.json")
 if (!fs.existsSync(configFilePath)) {
   fs.writeFileSync(configFilePath, JSON.stringify(sampleConfig, undefined, 4))
