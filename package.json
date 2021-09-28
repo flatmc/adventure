@@ -1,0 +1,19 @@
+{
+  "private": "true",
+  "scripts": {
+    "start": "ts-node src/main.ts",
+    "build": "ts-node scripts/build.ts"
+  },
+  "dependencies": {
+    "minecraft-launcher-core": "^3.16.8"
+  },
+  "devDependencies": {
+    "@types/node": "^16.10.1",
+    "@types/shelljs": "^0.8.9",
+    "pkg": "^5.3.2",
+    "prettier": "^2.4.1",
+    "shelljs": "^0.8.4",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.3"
+  }
+}
